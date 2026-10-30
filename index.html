@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="de"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>A15 Auseinandersetzung mit Tod und Sterben</title>
+<style>
+:root{--bg:#F8F3F4;--surface:#fff;--ink:#2A1B20;--muted:#6A5A5F;--line:#E4D7DA;--accent:#8E2C48;--accent-ink:#fff;--accent-soft:#F4DEE5}
+@media (prefers-color-scheme:dark){:root{--bg:#1B1316;--surface:#261B20;--ink:#F1E6E9;--muted:#C3AEB5;--line:#3E2D34;--accent:#E58AA5;--accent-ink:#2B0E17;--accent-soft:#42202C}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.55 system-ui,"Segoe UI",sans-serif}
+.wrap{max-width:760px;margin:0 auto;padding:0 16px 56px}
+header.top{position:sticky;top:0;background:var(--bg);border-bottom:1px solid var(--line);z-index:5}
+header.top .wrap{padding-block:10px}
+.bar{height:8px;background:var(--line);border-radius:9px;overflow:hidden;margin-top:6px}.bar i{display:block;height:100%;background:var(--accent);width:0;transition:width .3s}
+.pt{display:flex;justify-content:space-between;font-size:.92rem;color:var(--muted)}
+h1{font-size:clamp(1.6rem,5vw,2.3rem);line-height:1.15;margin:26px 0 6px}
+.lead{color:var(--muted);margin:0 0 18px}
+.q{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin:14px 0}
+.q.a{border-color:var(--accent)}
+.q p{margin:0 0 12px}.q p b{color:var(--accent);margin-right:6px}
+.sc{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.sc label{display:flex;align-items:center;justify-content:center;text-align:center;padding:10px 6px;min-height:48px;cursor:pointer;font-size:.93rem;border-left:1px solid var(--line);position:relative}
+.sc label:first-child{border-left:0}
+.sc input{position:absolute;opacity:0;inset:0;cursor:pointer}
+.sc label:has(input:checked){background:var(--accent);color:var(--accent-ink);font-weight:700}
+.sc label:has(input:focus-visible){outline:3px solid var(--accent);outline-offset:-3px}
+.sc .m{color:var(--muted);font-size:1.2rem}.sc label:has(input:checked) .m{color:inherit}
+.rd{display:grid;gap:8px}.rd label{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border:1px solid var(--line);border-radius:10px;cursor:pointer}
+.rd label:has(input:checked){border-color:var(--accent);background:var(--accent-soft)}
+textarea{width:100%;font:inherit;color:inherit;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:10px 12px;resize:vertical}
+.acts{display:flex;gap:10px;flex-wrap:wrap;margin:26px 0}
+button{font:inherit;cursor:pointer;border:1px solid var(--line);background:var(--surface);color:inherit;border-radius:10px;padding:10px 16px;font-weight:600}
+button.pri{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.note{background:var(--accent-soft);border-radius:10px;padding:10px 14px;font-size:.95rem}
+h2{font-size:1.15rem;margin:30px 0 0}
+@media print{header.top,.acts,.note{display:none}body{background:#fff;color:#000}.q{break-inside:avoid}}
+@media (max-width:520px){.sc label{font-size:.82rem;padding:8px 3px}}
+</style></head><body>
+<header class="top"><div class="wrap"><div class="pt"><b>A15 · Fragebogen</b><span id="pt"></span></div><div class="bar"><i id="pb"></i></div></div></header>
+<main class="wrap">
+<h1>Auseinandersetzung mit Tod und Sterben</h1>
+<p class="lead">Fragebogen zur Selbstreflexion. Antworte spontan. Es gibt keine richtigen oder falschen Antworten.</p>
+<div class="note">Deine Antworten bleiben nur in diesem Browser gespeichert und werden nirgends hingeschickt. Über die Schaltflächen unten kannst du sie ausdrucken oder als Textdatei sichern. Wenn dich das Thema belastet: Die Telefonseelsorge ist kostenfrei und rund um die Uhr erreichbar, 0800 111 0 111 oder 0800 111 0 222.</div>
+<form id="f" onsubmit="return false"></form>
+<div class="acts"><button class="pri" id="b-print">Drucken / als PDF sichern</button><button id="b-txt">Als Textdatei speichern</button><button id="b-reset">Alle Antworten löschen</button></div>
+</main>
+<script>
+const YN=["Ja","","","Nein"],SN=["Stimmt","","","Stimmt nicht"],NO=["Nein, nie","","","Ja, oft"],LS=["Ja, ich lese so etwas oft","","","Nein, ich lese so etwas nie"];
+const Q=[
+["t","Ergänze den Satz mit dem, was dir spontan einfällt: Der Tod ist …"],
+["t","Wenn ich an den Tod denke, empfinde ich …"],
+["s","Finden Sie, dass in unserer Gesellschaft im Allgemeinen offen mit dem Thema „Tod“ umgegangen wird?",YN],
+["s","Sind Sie mit dem Umgang mit Tod und Sterben in unserer Gesellschaft zufrieden?",YN],
+["s","Ich wünsche mir einen offeneren Umgang mit dem Thema „Tod und Sterben“ in unserer Gesellschaft.",YN],
+["s","Ich halte eine Beschäftigung mit Tod und Sterben für sinnlos und überflüssig.",SN],
+["s","Beschäftigt Sie der Gedanke an Ihren eigenen möglichen Tod?",NO],
+["s","Der Gedanke an meinen Tod ist für mich so schrecklich, dass ich versuche, ihn zu vermeiden und aus dem Bewusstsein zu verdrängen.",SN],
+["s","Ich denke, auch in meinem Alter ist es wichtig, sich mit dem Tod auseinander zu setzen.",SN],
+["s","Ich denke, mit Tod und Sterben braucht man sich erst im (höheren) Alter auseinander zu setzen.",SN],
+["s","In der BRD sterben laut Statistik jährlich über 10 000 Menschen im Straßenverkehr. Machen Sie sich manchmal bewusst, dass Sie darunter sein könnten?",NO],
+["r","Haben Sie so etwas wie ein Testament geschrieben?",["Ja","Nein"]],
+["s","Haben Sie schon darüber nachgedacht, ein Testament oder Ähnliches zu schreiben?",NO],
+["s","Beschäftigt Sie der Gedanke, dass ein Mensch, den Sie lieb haben, sterben könnte?",NO],
+["s","Der Gedanke, dass ein Mensch, den ich sehr lieb habe, sterben könnte, macht mir große Angst.",SN],
+["s","Der Gedanke an den Tod und die zeitliche Begrenztheit des Lebens macht einem bewusst, was und wer einem im Leben wirklich wichtig ist.",SN],
+["s","Interessieren Sie sich für Literatur (Romane, Erzählungen etc.) und/oder Berichte in Zeitschriften und Zeitungen zum Thema „Tod“?",LS],
+["s","Sprechen Sie mit Ihren Eltern oder anderen Erwachsenen über Tod und Sterben?",NO],
+["s","Sprechen Sie mit Ihren Freundinnen oder anderen Gleichaltrigen über Tod und Sterben?",SN],
+["s","Ich habe Hemmungen, mit anderen Menschen über meine Gedanken und Gefühle zu Tod und Sterben zu sprechen.",SN],
+["s","Ich denke, mit anderen Menschen über Tod und Sterben zu sprechen, kann einem helfen, die Angst vor dem Tod zu bewältigen.",SN],
+["s","Über den Tod weiß doch keiner Bescheid, warum sollte man darüber reden?",SN],
+["s","Denken Sie manchmal über den Sinn Ihres Lebens nach?",NO],
+["s","Das Bewusstsein vom Tod und von der zeitlichen Begrenztheit des Lebens ist wichtig, damit man erkennt, was man im Leben will, damit man sein Leben bewusst gestaltet.",SN],
+["s","Angesichts des Todes erscheint mir das ganze Leben sinnlos.",SN],
+["s","Ich kann jederzeit sterben/vom Tod betroffen sein. Darum versuche ich möglichst, wichtige Dinge in meinem Leben nicht auf später zu verschieben.",SN],
+["s","Bei dem Gedanken an meinen möglichen Tod bin ich dankbar für jeden Tag und versuche möglichst, etwas Schönes zu erleben.",SN],
+["s","Wenn meine Eltern heute bei einem Autounfall ums Leben kommen würden, hätte ich das Gefühl, ihnen wichtige Dinge nicht gesagt zu haben.",SN],
+["s","Wenn ich heute sterben müsste, würde mich der Gedanke bedrücken, dass ich einigen Menschen nicht gesagt habe, wie viel sie mir bedeuten.",SN],
+["s","Wenn meine Eltern heute bei einem Autounfall ums Leben kommen würden, täte es mir Leid, dass wir nicht anders miteinander umgegangen sind.",SN],
+["s","Wenn ich heute sterben würde, wäre ich mit meinem (bisherigen) Leben zufrieden und hätte nicht das Gefühl, etwas versäumt zu haben.",SN],
+["s","Ich habe Angst vor dem Tod.",SN],
+["s","Wären Sie gerne unsterblich?",YN],
+["s","Ich vermeide bewusst riskantes Verhalten und Situationen, die (lebens-)gefährlich sein könnten.",SN],
+["s","Ich fahre manchmal Auto oder Motorrad (als Fahrer/in oder Beifahrer/in), ohne mich anzuschnallen oder einen Helm aufzusetzen.",NO],
+["s","Bei sexuellen Kontakten bestehe ich darauf, Kondome zu benutzen, um mich und meinen Partner/meine Partnerin vor Aids zu schützen.",NO],
+["s","Ich verhalte mich im Straßenverkehr leichtsinnig, z. B. fahre ich Auto, obwohl ich Alkohol getrunken habe, und fahre bei Leuten mit, die etwas getrunken haben.",NO],
+["s","Ich habe keine Angst vor dem Tod.",SN],
+["s","Angenommen, ein Freund/eine Freundin wäre unheilbar an Krebs erkrankt. Wenn möglich, würde ich vermeiden, mit ihm/ihr zu sprechen.",SN],
+["s","Angenommen, eine Freundin/ein Freund wäre unheilbar an Krebs erkrankt. Ich wüsste nicht, was ich ihr/ihm sagen könnte, wie ich ihr/ihm helfen könnte.",SN],
+["s","Ich könnte mit Sterbenden über ihren bevorstehenden Tod und ihre Gefühle reden.",SN],
+["s","Wenn ein Freund/eine Freundin im Krankenhaus im Sterben läge, würde ich ihn/sie besuchen.",NO],
+["s","Ich kann mir gar nicht vorstellen, eines Tages nicht mehr zu leben.",SN],
+["s","Ich kann akzeptieren, dass ich nur eine begrenzte Zeit zum Leben habe.",SN],
+["s","Ich will zwar nicht jetzt sterben, aber ich bin froh, eines Tages zu sterben.",SN],
+["s","Die Qualität meines Lebens ist mir wichtiger als die Dauer des Lebens.",SN],
+["s","Der Gedanke, wie kurz das Leben ist, beunruhigt mich.",SN],
+["s","Angenommen, der Vater einer Freundin/eines Freundes wäre gerade bei einem Verkehrsunfall ums Leben gekommen. Ich würde es möglichst vermeiden, diese Freundin/den Freund zu treffen.",SN],
+["s","Angenommen, der Vater einer Freundin/eines Freundes wäre gerade bei einem Verkehrsunfall ums Leben gekommen. Ich wüsste nicht, was ich ihr/ihm sagen sollte, wie ich sie/ihn trösten könnte.",SN],
+["s","Der Vater eines Freundes/einer Freundin ist gerade ums Leben gekommen. Ich würde den Freund/die Freundin besuchen.",NO],
+["s","Ich könnte mit Trauernden über ihren Verlust und ihre Trauer sprechen.",SN],
+["s","Beschäftigt Sie manchmal der Gedanke, was nach dem Tod sein wird?",NO],
+["s","Die Unsicherheit, was nach dem Tod sein wird, beunruhigt mich.",SN],
+["r","Welcher Aussage würden Sie zustimmen (nur eine Antwort)?",["Ich glaube, der Tod ist das absolute Ende der individuellen Existenz.","Ich glaube, es gibt eine – wie auch immer geartete – Existenz nach dem Tod.","Ich bin nicht sicher, was ich glauben kann."]],
+["s","Für mich ist der Tod das Schlimmste im Leben.",SN],
+["s","Für mich ist der Tod ein Ausweg aus einem Leben voller Schwierigkeiten.",SN],
+["s","Ich denke, dass einige Erfahrungen im Leben schlimmer sind als der Tod.",SN],
+["t","Stellen Sie sich vor, bei Ihnen würde eine unheilbare Krankheit festgestellt und Sie hätten nur noch drei Monate zu leben. Wie würden Sie diese Zeit verbringen, was würden Sie unbedingt noch tun wollen?"]
+];
+const KEY="m05-a15-v1",$=s=>document.querySelector(s);
+let A={};try{A=JSON.parse(localStorage.getItem(KEY)||"{}")}catch(e){}
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(A))}catch(e){}};
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+function render(){
+ $("#f").innerHTML=Q.map((q,i)=>{
+  const n=i+1,v=A[n];let body;
+  if(q[0]==="t")body='<textarea name="q'+n+'" rows="5" aria-label="Antwort zu Frage '+n+'">'+esc(v||"")+'</textarea>';
+  else if(q[0]==="r")body='<div class="rd">'+q[2].map((o,k)=>'<label><input type="radio" name="q'+n+'" value="'+k+'"'+(v===String(k)?" checked":"")+'> <span>'+esc(o)+'</span></label>').join("")+'</div>';
+  else body='<div class="sc" role="radiogroup">'+q[2].map((o,k)=>'<label><input type="radio" name="q'+n+'" value="'+k+'"'+(v===String(k)?" checked":"")+' aria-label="'+esc(o||("Stufe "+(k+1)+" von 4"))+'">'+(o?esc(o):'<span class="m">·</span>')+'</label>').join("")+'</div>';
+  return '<section class="q'+(v?" a":"")+'" id="q'+n+'"><p><b>'+n+'.</b>'+esc(q[1])+'</p>'+body+'</section>';
+ }).join("");
+ prog();
+}
+function prog(){const d=Object.values(A).filter(x=>x!=="").length;$("#pt").textContent=d+" von "+Q.length+" beantwortet";$("#pb").style.width=Math.round(d/Q.length*100)+"%"}
+$("#f").addEventListener("input",e=>{const t=e.target,m=/^q(\d+)$/.exec(t.name||"");if(!m)return;
+ if(t.value==="")delete A[m[1]];else A[m[1]]=t.value;save();t.closest(".q").classList.toggle("a",t.value!=="");prog()});
+function lab(q,v){if(q[0]==="t")return v;const o=q[2][+v];return o||("Stufe "+(+v+1)+" von 4 ("+q[2][0]+" … "+q[2][3]+")")}
+$("#b-txt").onclick=()=>{
+ const t="A15 Auseinandersetzung mit Tod und Sterben\n\n"+Q.map((q,i)=>(i+1)+". "+q[1]+"\n   → "+(A[i+1]!==undefined&&A[i+1]!==""?lab(q,A[i+1]):"(keine Antwort)")).join("\n\n")+"\n";
+ const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([t],{type:"text/plain;charset=utf-8"}));a.download="A15-Antworten.txt";a.click();setTimeout(()=>URL.revokeObjectURL(a.href),2000)};
+$("#b-print").onclick=()=>window.print();
+$("#b-reset").onclick=()=>{if(confirm("Alle Antworten löschen?")){A={};save();render()}};
+render();
+</script>
+<!--rechtstexte-->
+<div id="rt-footer-host"></div>
+<template id="rt-footer-tpl"><style>
+:host{display:block;all:initial}
+.bar{display:block;box-sizing:border-box;width:100%;margin:2.5rem 0 0;padding:.9rem 1rem 1.2rem;text-align:center;font:12px/1.4 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:#8a8a8a}
+.bar button{all:unset;cursor:pointer;color:#8a8a8a;text-decoration:underline;text-underline-offset:2px;padding:.2rem .35rem;border-radius:4px}
+.bar button:hover,.bar button:focus-visible{color:#555}
+.bar button:focus-visible{outline:2px solid #888}
+dialog{box-sizing:border-box;width:min(720px,calc(100vw - 2rem));max-height:85vh;overflow:auto;border:1px solid #ccc;border-radius:10px;padding:1.2rem 1.4rem;background:#fff;color:#222;font:14px/1.55 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+dialog::backdrop{background:rgba(0,0,0,.45)}
+h2{margin:0 0 .6rem;font-size:1.25rem}h3{margin:1rem 0 .3rem;font-size:1rem}p{margin:.3rem 0}.st{color:#777;font-size:.85rem;margin-top:1rem}
+.x{position:sticky;top:0;float:right;background:#eee;color:#222;border:0;border-radius:6px;padding:.3rem .7rem;cursor:pointer;font:inherit}
+@media (prefers-color-scheme:dark){.bar,.bar button{color:#8d8d8d}dialog{background:#1f1f1f;color:#e6e6e6;border-color:#444}.x{background:#333;color:#eee}.st{color:#999}}
+</style>
+<div class="bar"><button type="button" data-open="imp">Impressum</button> · <button type="button" data-open="dat">Datenschutz</button></div>
+<dialog id="imp" aria-labelledby="imp-t"><button class="x" type="button" data-close>Schließen</button><h2 id="imp-t">Impressum</h2><h3>Angaben gemäß § 5 DDG</h3>
+<p>crosspublish media GmbH<br>Leipziger Str. 27<br>09648 Mittweida<br>Deutschland</p>
+<p>Vertreten durch den Geschäftsführer: Michael Ascheron</p>
+<h3>Kontakt</h3>
+<p>Telefon: +49 (0) 3727 9760<br>E-Mail: info@crosspublish.de</p>
+<h3>Register und Steuer</h3>
+<p>Registergericht: Amtsgericht Chemnitz, HRB 31759<br>Umsatzsteuer-Identifikationsnummer gemäß § 27a UStG: DE318536831</p>
+<h3>Verantwortlich für den Inhalt (§ 18 Abs. 2 MStV)</h3>
+<p>Michael Ascheron, Anschrift wie oben</p>
+<h3>Verbraucherstreitbeilegung</h3>
+<p>Wir sind nicht bereit und nicht verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen (§ 36 VSBG). Die Angebote richten sich ausschließlich an Unternehmer im Sinne des § 14 BGB sowie an Teilnehmende von Fortbildungen zu Lernzwecken.</p>
+<h3>Haftung für Inhalte und Links</h3>
+<p>Die Inhalte dieser Seite dienen der Lernunterstützung und ersetzen keine Rechtsberatung. Für Inhalte externer Links sind ausschließlich deren Betreiber verantwortlich; zum Zeitpunkt der Verlinkung waren keine Rechtsverstöße erkennbar. Bei Bekanntwerden von Rechtsverletzungen entfernen wir entsprechende Links umgehend.</p>
+<h3>Urheberrecht</h3>
+<p>Eigene Inhalte unterliegen dem deutschen Urheberrecht. Gesetzestexte sind gemeinfrei (§ 5 UrhG); Inhalte Dritter (z. B. Wikipedia, Wikimedia Commons) bleiben unter deren jeweiligen Lizenzen.</p>
+<p class="st">Stand: Oktober 2026</p></dialog>
+<dialog id="dat" aria-labelledby="dat-t"><button class="x" type="button" data-close>Schließen</button><h2 id="dat-t">Datenschutzerklärung</h2><h3>1. Verantwortlicher</h3><p>Verantwortlich im Sinne der Datenschutz-Grundverordnung (DSGVO) ist die crosspublish media GmbH, Leipziger Str. 27, 09648 Mittweida, Deutschland, E-Mail: info@crosspublish.de. Anfragen zum Datenschutz richten Sie bitte an diese Adresse.</p>
+<h3>2. Hosting und Server-Logdateien</h3><p>Diese Seite wird bei Netlify, Inc., 512 2nd Street, Suite 200, San Francisco, CA 94107, USA, gehostet. Beim Aufruf verarbeitet der Hosting-Anbieter technisch notwendige Verbindungsdaten (IP-Adresse, Datum und Uhrzeit, aufgerufene Datei, Browser- und Betriebssysteminformationen, Referrer), um die Seite auszuliefern und die Sicherheit des Angebots zu gewährleisten. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an einem sicheren und stabilen Betrieb). Mit dem Anbieter besteht ein Auftragsverarbeitungsverhältnis nach Art. 28 DSGVO. Soweit Daten in die USA übermittelt werden, stützt sich die Übermittlung auf den Angemessenheitsbeschluss der EU-Kommission zum EU-U.S. Data Privacy Framework bzw. auf Standardvertragsklauseln (Art. 45, 46 DSGVO). Die Logdaten werden nach Ablauf der vom Anbieter festgelegten kurzen Fristen gelöscht.</p>
+<h3>3. Zugriffsschutz</h3><p>Der Zugriff auf diese Seite kann auf angemeldete Mitglieder eines Teams beschränkt sein. Bei der Anmeldung verarbeitet Netlify die dafür nötigen Kontodaten. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO.</p>
+<h3>4. Schriftarten</h3><p>Zur einheitlichen Darstellung lädt diese Seite Schriftarten von externen Servern: Google Fonts (Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland, sowie Google LLC, USA). Dabei wird Ihre IP-Adresse an den jeweiligen Anbieter übermittelt, der daraus ableiten kann, dass die Seite aufgerufen wurde. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO (einheitliche, ansprechende Darstellung). Eine Übermittlung in Drittländer stützt sich, soweit erforderlich, auf das EU-U.S. Data Privacy Framework bzw. Standardvertragsklauseln. Sie können dem Laden jederzeit widersprechen, etwa durch einen Schriftarten- oder Skriptblocker; die Seite wird dann mit Ersatzschriften angezeigt.</p>
+<h3>5. Lokale Speicherung im Browser</h3><p>Diese Seite speichert Einstellungen und Ihren Lernstand (z. B. gemerkte Antworten oder Filter) im lokalen Speicher Ihres Browsers (Local Storage). Die Daten verbleiben auf Ihrem Gerät und werden nicht an uns oder Dritte übertragen. Die Speicherung ist für die von Ihnen gewünschte Funktion erforderlich (§ 25 Abs. 2 Nr. 2 TDDDG); die anschließende Verarbeitung beruht auf Art. 6 Abs. 1 lit. f DSGVO. Sie können die Daten jederzeit in den Browsereinstellungen löschen. Es werden keine Cookies zu Analyse- oder Werbezwecken gesetzt.</p>
+<h3>6. Keine Analyse, keine Werbung</h3><p>Wir setzen keine Webanalyse-, Tracking- oder Werbedienste ein und verarbeiten keine Kontaktformulare oder Newsletter-Daten über diese Seite.</p>
+<h3>7. Externe Links und Inhalte</h3><p>Diese Seite enthält Links zu externen Angeboten (z. B. Gesetzestexte, Wikipedia, Anbieterseiten). Beim Anklicken gelten die Datenschutzbestimmungen der jeweiligen Betreiber; auf deren Datenverarbeitung haben wir keinen Einfluss.</p>
+<h3>8. Ihre Rechte</h3><p>Sie haben das Recht auf Auskunft (Art. 15 DSGVO), Berichtigung (Art. 16), Löschung (Art. 17), Einschränkung der Verarbeitung (Art. 18), Datenübertragbarkeit (Art. 20) sowie Widerspruch gegen Verarbeitungen auf Grundlage berechtigter Interessen (Art. 21 DSGVO). Eine erteilte Einwilligung können Sie jederzeit mit Wirkung für die Zukunft widerrufen (Art. 7 Abs. 3 DSGVO). Wenden Sie sich dazu an info@crosspublish.de. Außerdem haben Sie das Recht, sich bei einer Aufsichtsbehörde zu beschweren (Art. 77 DSGVO), z. B. beim Sächsischen Datenschutz- und Transparenzbeauftragten, Devrientstraße 5, 01067 Dresden.</p>
+<p class="st">Stand: Oktober 2026</p></dialog></template>
+<script>(function(){try{var h=document.getElementById('rt-footer-host'),t=document.getElementById('rt-footer-tpl');if(!h||!t)return;var r=h.attachShadow({mode:'open'});r.appendChild(t.content.cloneNode(true));r.addEventListener('click',function(e){var o=e.target.closest('[data-open]'),c=e.target.closest('[data-close]'),d=e.target.tagName==='DIALOG'?e.target:null;if(o){r.getElementById(o.dataset.open).showModal()}else if(c){c.closest('dialog').close()}else if(d){d.close()}})}catch(x){}})();</script>
+<!--/rechtstexte-->
