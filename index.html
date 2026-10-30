@@ -7,26 +7,29 @@
 @media (prefers-color-scheme:dark){:root{--bg:#1B1316;--surface:#261B20;--ink:#F1E6E9;--muted:#C3AEB5;--line:#3E2D34;--accent:#E58AA5;--accent-ink:#2B0E17;--accent-soft:#42202C}}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.55 system-ui,"Segoe UI",sans-serif}
-.wrap{max-width:760px;margin:0 auto;padding:0 16px 56px}
+.wrap{max-width:1080px;margin:0 auto;padding:0 16px 56px}
 header.top{position:sticky;top:0;background:var(--bg);border-bottom:1px solid var(--line);z-index:5}
 header.top .wrap{padding-block:10px}
 .bar{height:8px;background:var(--line);border-radius:9px;overflow:hidden;margin-top:6px}.bar i{display:block;height:100%;background:var(--accent);width:0;transition:width .3s}
 .pt{display:flex;justify-content:space-between;font-size:.92rem;color:var(--muted)}
 h1{font-size:clamp(1.6rem,5vw,2.3rem);line-height:1.15;margin:26px 0 6px}
 .lead{color:var(--muted);margin:0 0 18px}
-.q{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin:14px 0}
+#f{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 14px;align-items:start;margin-top:14px}
+.q{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin:0}
+.q:has(textarea){grid-column:1/-1}
+@media (max-width:760px){#f{grid-template-columns:1fr}}
 .q.a{border-color:var(--accent)}
-.q p{margin:0 0 12px}.q p b{color:var(--accent);margin-right:6px}
-.sc{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--line);border-radius:10px;overflow:hidden}
-.sc label{display:flex;align-items:center;justify-content:center;text-align:center;padding:10px 6px;min-height:48px;cursor:pointer;font-size:.93rem;border-left:1px solid var(--line);position:relative}
+.q p{margin:0 0 8px;font-size:.96rem;line-height:1.4}.q p b{color:var(--accent);margin-right:6px}
+.sc{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--line);border-radius:6px;overflow:hidden}
+.sc label{display:flex;align-items:center;justify-content:center;text-align:center;padding:4px 4px;min-height:30px;cursor:pointer;font-size:.84rem;line-height:1.2;border-left:1px solid var(--line);position:relative}
 .sc label:first-child{border-left:0}
 .sc input{position:absolute;opacity:0;inset:0;cursor:pointer}
 .sc label:has(input:checked){background:var(--accent);color:var(--accent-ink);font-weight:700}
 .sc label:has(input:focus-visible){outline:3px solid var(--accent);outline-offset:-3px}
 .sc .m{color:var(--muted);font-size:1.2rem}.sc label:has(input:checked) .m{color:inherit}
-.rd{display:grid;gap:8px}.rd label{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border:1px solid var(--line);border-radius:10px;cursor:pointer}
+.rd{display:grid;gap:4px}.rd label{display:flex;gap:8px;align-items:flex-start;padding:5px 9px;border:1px solid var(--line);border-radius:6px;cursor:pointer;font-size:.9rem;line-height:1.3}
 .rd label:has(input:checked){border-color:var(--accent);background:var(--accent-soft)}
-textarea{width:100%;font:inherit;color:inherit;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:10px 12px;resize:vertical}
+textarea{width:100%;font:inherit;color:inherit;background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:8px 10px;resize:vertical}
 .acts{display:flex;gap:10px;flex-wrap:wrap;margin:26px 0}
 button{font:inherit;cursor:pointer;border:1px solid var(--line);background:var(--surface);color:inherit;border-radius:10px;padding:10px 16px;font-weight:600}
 button.pri{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
@@ -133,7 +136,7 @@ const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",
 function render(){
  $("#f").innerHTML=Q.map((q,i)=>{
   const n=i+1,v=A[n];let body;
-  if(q[0]==="t")body='<textarea name="q'+n+'" rows="5" aria-label="Antwort zu Frage '+n+'">'+esc(v||"")+'</textarea><div class="pa" id="pa'+n+'">'+esc(v||"")+'</div>';
+  if(q[0]==="t")body='<textarea name="q'+n+'" rows="3" aria-label="Antwort zu Frage '+n+'">'+esc(v||"")+'</textarea><div class="pa" id="pa'+n+'">'+esc(v||"")+'</div>';
   else if(q[0]==="r")body='<div class="rd">'+q[2].map((o,k)=>'<label><input type="radio" name="q'+n+'" value="'+k+'"'+(v===String(k)?" checked":"")+'> <span>'+esc(o)+'</span></label>').join("")+'</div>';
   else body='<div class="sc" role="radiogroup">'+q[2].map((o,k)=>'<label><input type="radio" name="q'+n+'" value="'+k+'"'+(v===String(k)?" checked":"")+' aria-label="'+esc(o||("Stufe "+(k+1)+" von 4"))+'">'+(o?esc(o):'<span class="m">·</span>')+'</label>').join("")+'</div>';
   return '<section class="q'+(v?" a":"")+'" id="q'+n+'"><p><b>'+n+'.</b>'+esc(q[1])+'</p>'+body+'</section>';
