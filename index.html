@@ -41,20 +41,19 @@ header.top,.acts,.note,.lead{display:none}
 body{background:#fff;color:#000;font-size:9pt;line-height:1.3}
 .wrap{max-width:none;padding:0}
 h1{font-size:13pt;margin:0 0 3mm}
-form{display:block}
-.q{border:.3mm solid #999;border-radius:1.5mm;padding:1.6mm 2.4mm;margin:0 0 1.6mm;break-inside:avoid;background:#fff}
-.q:nth-of-type(10n+1):not(:first-of-type){break-before:page}
-.q p{margin:0 0 1.2mm;font-size:8.6pt}
+form{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.4mm 2.4mm;align-items:start}
+.q{border:.3mm solid #999;border-radius:1.5mm;padding:1.4mm 2mm;margin:0;break-inside:avoid;background:#fff}
+.q p{margin:0 0 1mm;font-size:8pt;line-height:1.25}
 .q p b{color:#000}
 .sc{border:.3mm solid #666;border-radius:1mm;grid-template-columns:repeat(4,1fr)}
-.sc label{min-height:0;padding:.7mm 1mm;font-size:7.6pt;border-left:.3mm solid #666}
+.sc label{min-height:0;padding:.5mm .6mm;font-size:7pt;border-left:.3mm solid #666}
 .sc label:first-child{border-left:0}
 .sc label:has(input:checked){background:#000!important;color:#fff!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
 .sc .m{display:none}
-.rd{gap:.6mm}.rd label{padding:.5mm 1.5mm;border:.3mm solid #999;font-size:8pt}
+.rd{gap:.6mm}.rd label{padding:.4mm 1.2mm;border:.3mm solid #999;font-size:7.4pt}
 .rd label:has(input:checked){background:#ddd!important;font-weight:700;-webkit-print-color-adjust:exact;print-color-adjust:exact}
 textarea{display:none}
-.pa{display:block!important;border:.3mm solid #999;border-radius:1mm;padding:1mm 1.6mm;min-height:7mm;font-size:8.4pt;white-space:pre-wrap}
+.pa{display:block!important;border:.3mm solid #999;border-radius:1mm;padding:.8mm 1.4mm;min-height:6mm;font-size:8pt;white-space:pre-wrap}
 }
 .pa{display:none}
 @media (max-width:520px){.sc label{font-size:.82rem;padding:8px 3px}}
