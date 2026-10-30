@@ -32,7 +32,28 @@ button{font:inherit;cursor:pointer;border:1px solid var(--line);background:var(-
 button.pri{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
 .note{background:var(--accent-soft);border-radius:10px;padding:10px 14px;font-size:.95rem}
 h2{font-size:1.15rem;margin:30px 0 0}
-@media print{header.top,.acts,.note{display:none}body{background:#fff;color:#000}.q{break-inside:avoid}}
+@media print{
+@page{size:A4;margin:9mm 12mm}
+header.top,.acts,.note,.lead{display:none}
+body{background:#fff;color:#000;font-size:9pt;line-height:1.3}
+.wrap{max-width:none;padding:0}
+h1{font-size:13pt;margin:0 0 3mm}
+form{display:block}
+.q{border:.3mm solid #999;border-radius:1.5mm;padding:1.6mm 2.4mm;margin:0 0 1.6mm;break-inside:avoid;background:#fff}
+.q:nth-of-type(10n+1):not(:first-of-type){break-before:page}
+.q p{margin:0 0 1.2mm;font-size:8.6pt}
+.q p b{color:#000}
+.sc{border:.3mm solid #666;border-radius:1mm;grid-template-columns:repeat(4,1fr)}
+.sc label{min-height:0;padding:.7mm 1mm;font-size:7.6pt;border-left:.3mm solid #666}
+.sc label:first-child{border-left:0}
+.sc label:has(input:checked){background:#000!important;color:#fff!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.sc .m{display:none}
+.rd{gap:.6mm}.rd label{padding:.5mm 1.5mm;border:.3mm solid #999;font-size:8pt}
+.rd label:has(input:checked){background:#ddd!important;font-weight:700;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+textarea{display:none}
+.pa{display:block!important;border:.3mm solid #999;border-radius:1mm;padding:1mm 1.6mm;min-height:7mm;font-size:8.4pt;white-space:pre-wrap}
+}
+.pa{display:none}
 @media (max-width:520px){.sc label{font-size:.82rem;padding:8px 3px}}
 </style></head><body>
 <header class="top"><div class="wrap"><div class="pt"><b>A15 · Fragebogen</b><span id="pt"></span></div><div class="bar"><i id="pb"></i></div></div></header>
@@ -112,7 +133,7 @@ const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",
 function render(){
  $("#f").innerHTML=Q.map((q,i)=>{
   const n=i+1,v=A[n];let body;
-  if(q[0]==="t")body='<textarea name="q'+n+'" rows="5" aria-label="Antwort zu Frage '+n+'">'+esc(v||"")+'</textarea>';
+  if(q[0]==="t")body='<textarea name="q'+n+'" rows="5" aria-label="Antwort zu Frage '+n+'">'+esc(v||"")+'</textarea><div class="pa" id="pa'+n+'">'+esc(v||"")+'</div>';
   else if(q[0]==="r")body='<div class="rd">'+q[2].map((o,k)=>'<label><input type="radio" name="q'+n+'" value="'+k+'"'+(v===String(k)?" checked":"")+'> <span>'+esc(o)+'</span></label>').join("")+'</div>';
   else body='<div class="sc" role="radiogroup">'+q[2].map((o,k)=>'<label><input type="radio" name="q'+n+'" value="'+k+'"'+(v===String(k)?" checked":"")+' aria-label="'+esc(o||("Stufe "+(k+1)+" von 4"))+'">'+(o?esc(o):'<span class="m">·</span>')+'</label>').join("")+'</div>';
   return '<section class="q'+(v?" a":"")+'" id="q'+n+'"><p><b>'+n+'.</b>'+esc(q[1])+'</p>'+body+'</section>';
@@ -121,7 +142,7 @@ function render(){
 }
 function prog(){const d=Object.values(A).filter(x=>x!=="").length;$("#pt").textContent=d+" von "+Q.length+" beantwortet";$("#pb").style.width=Math.round(d/Q.length*100)+"%"}
 $("#f").addEventListener("input",e=>{const t=e.target,m=/^q(\d+)$/.exec(t.name||"");if(!m)return;
- if(t.value==="")delete A[m[1]];else A[m[1]]=t.value;save();t.closest(".q").classList.toggle("a",t.value!=="");prog()});
+ if(t.value==="")delete A[m[1]];else A[m[1]]=t.value;save();t.closest(".q").classList.toggle("a",t.value!=="");const pa=document.getElementById("pa"+m[1]);if(pa)pa.textContent=t.value;prog()});
 function lab(q,v){if(q[0]==="t")return v;const o=q[2][+v];return o||("Stufe "+(+v+1)+" von 4 ("+q[2][0]+" … "+q[2][3]+")")}
 $("#b-txt").onclick=()=>{
  const t="A15 Auseinandersetzung mit Tod und Sterben\n\n"+Q.map((q,i)=>(i+1)+". "+q[1]+"\n   → "+(A[i+1]!==undefined&&A[i+1]!==""?lab(q,A[i+1]):"(keine Antwort)")).join("\n\n")+"\n";
