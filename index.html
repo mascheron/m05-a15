@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="de"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>A15 Auseinandersetzung mit Tod und Sterben</title>
+<title>Auseinandersetzung mit Tod und Sterben</title>
 <style>
 :root{--bg:#F8F3F4;--surface:#fff;--ink:#2A1B20;--muted:#6A5A5F;--line:#E4D7DA;--accent:#8E2C48;--accent-ink:#fff;--accent-soft:#F4DEE5}
 @media (prefers-color-scheme:dark){:root{--bg:#1B1316;--surface:#261B20;--ink:#F1E6E9;--muted:#C3AEB5;--line:#3E2D34;--accent:#E58AA5;--accent-ink:#2B0E17;--accent-soft:#42202C}}
@@ -58,7 +58,7 @@ textarea{display:none}
 .pa{display:none}
 @media (max-width:520px){.sc label{font-size:.82rem;padding:8px 3px}}
 </style></head><body>
-<header class="top"><div class="wrap"><div class="pt"><b>A15 · Fragebogen</b><span id="pt"></span></div><div class="bar"><i id="pb"></i></div></div></header>
+<header class="top"><div class="wrap"><div class="pt"><b>Fragebogen</b><span id="pt"></span></div><div class="bar"><i id="pb"></i></div></div></header>
 <main class="wrap">
 <h1>Auseinandersetzung mit Tod und Sterben</h1>
 <p class="lead">Fragebogen zur Selbstreflexion. Antworte spontan. Es gibt keine richtigen oder falschen Antworten.</p>
@@ -69,64 +69,64 @@ textarea{display:none}
 <script>
 const YN=["Ja","","","Nein"],SN=["Stimmt","","","Stimmt nicht"],NO=["Nein, nie","","","Ja, oft"],LS=["Ja, ich lese so etwas oft","","","Nein, ich lese so etwas nie"];
 const Q=[
-["t","Ergänze den Satz mit dem, was dir spontan einfällt: Der Tod ist …"],
-["t","Wenn ich an den Tod denke, empfinde ich …"],
-["s","Finden Sie, dass in unserer Gesellschaft im Allgemeinen offen mit dem Thema „Tod“ umgegangen wird?",YN],
-["s","Sind Sie mit dem Umgang mit Tod und Sterben in unserer Gesellschaft zufrieden?",YN],
-["s","Ich wünsche mir einen offeneren Umgang mit dem Thema „Tod und Sterben“ in unserer Gesellschaft.",YN],
-["s","Ich halte eine Beschäftigung mit Tod und Sterben für sinnlos und überflüssig.",SN],
-["s","Beschäftigt Sie der Gedanke an Ihren eigenen möglichen Tod?",NO],
-["s","Der Gedanke an meinen Tod ist für mich so schrecklich, dass ich versuche, ihn zu vermeiden und aus dem Bewusstsein zu verdrängen.",SN],
-["s","Ich denke, auch in meinem Alter ist es wichtig, sich mit dem Tod auseinander zu setzen.",SN],
-["s","Ich denke, mit Tod und Sterben braucht man sich erst im (höheren) Alter auseinander zu setzen.",SN],
-["s","In der BRD sterben laut Statistik jährlich über 10 000 Menschen im Straßenverkehr. Machen Sie sich manchmal bewusst, dass Sie darunter sein könnten?",NO],
-["r","Haben Sie so etwas wie ein Testament geschrieben?",["Ja","Nein"]],
-["s","Haben Sie schon darüber nachgedacht, ein Testament oder Ähnliches zu schreiben?",NO],
-["s","Beschäftigt Sie der Gedanke, dass ein Mensch, den Sie lieb haben, sterben könnte?",NO],
-["s","Der Gedanke, dass ein Mensch, den ich sehr lieb habe, sterben könnte, macht mir große Angst.",SN],
-["s","Der Gedanke an den Tod und die zeitliche Begrenztheit des Lebens macht einem bewusst, was und wer einem im Leben wirklich wichtig ist.",SN],
-["s","Interessieren Sie sich für Literatur (Romane, Erzählungen etc.) und/oder Berichte in Zeitschriften und Zeitungen zum Thema „Tod“?",LS],
-["s","Sprechen Sie mit Ihren Eltern oder anderen Erwachsenen über Tod und Sterben?",NO],
-["s","Sprechen Sie mit Ihren Freundinnen oder anderen Gleichaltrigen über Tod und Sterben?",SN],
-["s","Ich habe Hemmungen, mit anderen Menschen über meine Gedanken und Gefühle zu Tod und Sterben zu sprechen.",SN],
-["s","Ich denke, mit anderen Menschen über Tod und Sterben zu sprechen, kann einem helfen, die Angst vor dem Tod zu bewältigen.",SN],
-["s","Über den Tod weiß doch keiner Bescheid, warum sollte man darüber reden?",SN],
-["s","Denken Sie manchmal über den Sinn Ihres Lebens nach?",NO],
-["s","Das Bewusstsein vom Tod und von der zeitlichen Begrenztheit des Lebens ist wichtig, damit man erkennt, was man im Leben will, damit man sein Leben bewusst gestaltet.",SN],
-["s","Angesichts des Todes erscheint mir das ganze Leben sinnlos.",SN],
-["s","Ich kann jederzeit sterben/vom Tod betroffen sein. Darum versuche ich möglichst, wichtige Dinge in meinem Leben nicht auf später zu verschieben.",SN],
-["s","Bei dem Gedanken an meinen möglichen Tod bin ich dankbar für jeden Tag und versuche möglichst, etwas Schönes zu erleben.",SN],
-["s","Wenn meine Eltern heute bei einem Autounfall ums Leben kommen würden, hätte ich das Gefühl, ihnen wichtige Dinge nicht gesagt zu haben.",SN],
-["s","Wenn ich heute sterben müsste, würde mich der Gedanke bedrücken, dass ich einigen Menschen nicht gesagt habe, wie viel sie mir bedeuten.",SN],
-["s","Wenn meine Eltern heute bei einem Autounfall ums Leben kommen würden, täte es mir Leid, dass wir nicht anders miteinander umgegangen sind.",SN],
-["s","Wenn ich heute sterben würde, wäre ich mit meinem (bisherigen) Leben zufrieden und hätte nicht das Gefühl, etwas versäumt zu haben.",SN],
-["s","Ich habe Angst vor dem Tod.",SN],
-["s","Wären Sie gerne unsterblich?",YN],
-["s","Ich vermeide bewusst riskantes Verhalten und Situationen, die (lebens-)gefährlich sein könnten.",SN],
-["s","Ich fahre manchmal Auto oder Motorrad (als Fahrer/in oder Beifahrer/in), ohne mich anzuschnallen oder einen Helm aufzusetzen.",NO],
-["s","Bei sexuellen Kontakten bestehe ich darauf, Kondome zu benutzen, um mich und meinen Partner/meine Partnerin vor Aids zu schützen.",NO],
-["s","Ich verhalte mich im Straßenverkehr leichtsinnig, z. B. fahre ich Auto, obwohl ich Alkohol getrunken habe, und fahre bei Leuten mit, die etwas getrunken haben.",NO],
-["s","Ich habe keine Angst vor dem Tod.",SN],
-["s","Angenommen, ein Freund/eine Freundin wäre unheilbar an Krebs erkrankt. Wenn möglich, würde ich vermeiden, mit ihm/ihr zu sprechen.",SN],
-["s","Angenommen, eine Freundin/ein Freund wäre unheilbar an Krebs erkrankt. Ich wüsste nicht, was ich ihr/ihm sagen könnte, wie ich ihr/ihm helfen könnte.",SN],
-["s","Ich könnte mit Sterbenden über ihren bevorstehenden Tod und ihre Gefühle reden.",SN],
-["s","Wenn ein Freund/eine Freundin im Krankenhaus im Sterben läge, würde ich ihn/sie besuchen.",NO],
-["s","Ich kann mir gar nicht vorstellen, eines Tages nicht mehr zu leben.",SN],
-["s","Ich kann akzeptieren, dass ich nur eine begrenzte Zeit zum Leben habe.",SN],
-["s","Ich will zwar nicht jetzt sterben, aber ich bin froh, eines Tages zu sterben.",SN],
-["s","Die Qualität meines Lebens ist mir wichtiger als die Dauer des Lebens.",SN],
-["s","Der Gedanke, wie kurz das Leben ist, beunruhigt mich.",SN],
-["s","Angenommen, der Vater einer Freundin/eines Freundes wäre gerade bei einem Verkehrsunfall ums Leben gekommen. Ich würde es möglichst vermeiden, diese Freundin/den Freund zu treffen.",SN],
-["s","Angenommen, der Vater einer Freundin/eines Freundes wäre gerade bei einem Verkehrsunfall ums Leben gekommen. Ich wüsste nicht, was ich ihr/ihm sagen sollte, wie ich sie/ihn trösten könnte.",SN],
-["s","Der Vater eines Freundes/einer Freundin ist gerade ums Leben gekommen. Ich würde den Freund/die Freundin besuchen.",NO],
-["s","Ich könnte mit Trauernden über ihren Verlust und ihre Trauer sprechen.",SN],
-["s","Beschäftigt Sie manchmal der Gedanke, was nach dem Tod sein wird?",NO],
-["s","Die Unsicherheit, was nach dem Tod sein wird, beunruhigt mich.",SN],
-["r","Welcher Aussage würden Sie zustimmen (nur eine Antwort)?",["Ich glaube, der Tod ist das absolute Ende der individuellen Existenz.","Ich glaube, es gibt eine – wie auch immer geartete – Existenz nach dem Tod.","Ich bin nicht sicher, was ich glauben kann."]],
-["s","Für mich ist der Tod das Schlimmste im Leben.",SN],
-["s","Für mich ist der Tod ein Ausweg aus einem Leben voller Schwierigkeiten.",SN],
-["s","Ich denke, dass einige Erfahrungen im Leben schlimmer sind als der Tod.",SN],
-["t","Stellen Sie sich vor, bei Ihnen würde eine unheilbare Krankheit festgestellt und Sie hätten nur noch drei Monate zu leben. Wie würden Sie diese Zeit verbringen, was würden Sie unbedingt noch tun wollen?"]
+["t","Vervollständige spontan: Für mich ist der Tod …"],
+["t","Welche Gefühle tauchen bei dir auf, wenn du an den Tod denkst?"],
+["s","Hast du den Eindruck, dass unsere Gesellschaft das Thema Tod offen behandelt?",YN],
+["s","Bist du damit einverstanden, wie die Gesellschaft heute mit Sterben und Tod umgeht?",YN],
+["s","Ich fände es gut, wenn in der Gesellschaft freier über Sterben und Tod gesprochen würde.",YN],
+["s","Sich mit Sterben und Tod zu befassen, halte ich für unnötig und zwecklos.",SN],
+["s","Gehen dir manchmal Gedanken an deinen eigenen Tod durch den Kopf?",NO],
+["s","Die Vorstellung, selbst zu sterben, ist für mich so furchtbar, dass ich sie lieber wegschiebe und nicht daran denke.",SN],
+["s","Auch in meinem Lebensalter halte ich es für sinnvoll, sich gedanklich mit dem Tod zu befassen.",SN],
+["s","Mit dem Tod muss man sich meiner Meinung nach erst in fortgeschrittenem Alter beschäftigen.",SN],
+["s","Jedes Jahr kommen in Deutschland mehr als 10 000 Menschen im Straßenverkehr ums Leben. Führst du dir hin und wieder vor Augen, dass es auch dich treffen könnte?",NO],
+["r","Hast du bereits ein Testament oder etwas Vergleichbares verfasst?",["Ja","Nein"]],
+["s","Hast du schon einmal überlegt, ein Testament oder etwas Ähnliches aufzusetzen?",NO],
+["s","Denkst du manchmal daran, dass ein Mensch, der dir nahesteht, sterben könnte?",NO],
+["s","Es macht mir große Angst, daran zu denken, dass ein mir sehr nahestehender Mensch sterben könnte.",SN],
+["s","Wenn man sich klarmacht, dass das Leben endlich ist, wird deutlich, was und wer einem wirklich etwas bedeutet.",SN],
+["s","Liest du gern Bücher, Geschichten oder Zeitungs- und Magazinbeiträge, in denen es um den Tod geht?",LS],
+["s","Unterhältst du dich mit deinen Eltern oder anderen Erwachsenen über Sterben und Tod?",NO],
+["s","Mit Freundinnen, Freunden oder anderen Gleichaltrigen rede ich über Sterben und Tod.",SN],
+["s","Es fällt mir schwer, mit anderen über meine Gedanken und Gefühle zu Sterben und Tod zu reden.",SN],
+["s","Ich glaube, dass ein Gespräch über Sterben und Tod dabei helfen kann, die Angst davor zu überwinden.",SN],
+["s","Niemand weiß wirklich etwas über den Tod, also bringt es nichts, darüber zu sprechen.",SN],
+["s","Fragst du dich hin und wieder, worin der Sinn deines Lebens besteht?",NO],
+["s","Wer sich bewusst macht, dass das Leben endlich ist, erkennt eher, was er wirklich will, und gestaltet sein Leben bewusster.",SN],
+["s","Wenn ich an den Tod denke, kommt mir das ganze Leben sinnlos vor.",SN],
+["s","Da ich jederzeit sterben oder vom Tod eines anderen Menschen getroffen werden kann, schiebe ich Wichtiges möglichst nicht auf.",SN],
+["s","Wenn ich daran denke, dass ich sterben könnte, bin ich für jeden Tag dankbar und versuche, etwas Schönes zu erleben.",SN],
+["s","Stürben meine Eltern heute bei einem Autounfall, hätte ich das Gefühl, ihnen Wichtiges nicht gesagt zu haben.",SN],
+["s","Müsste ich heute sterben, würde es mich belasten, manchen Menschen nie gesagt zu haben, wie viel sie mir bedeuten.",SN],
+["s","Stürben meine Eltern heute bei einem Autounfall, würde ich bedauern, dass wir nicht anders miteinander umgegangen sind.",SN],
+["s","Würde ich heute sterben, wäre ich mit meinem bisherigen Leben zufrieden und hätte nicht das Gefühl, etwas verpasst zu haben.",SN],
+["s","Ich fürchte mich vor dem Tod.",SN],
+["s","Möchtest du gern unsterblich sein?",YN],
+["s","Ich gehe bewusst Risiken und möglicherweise lebensgefährlichen Situationen aus dem Weg.",SN],
+["s","Manchmal sitze ich im Auto oder auf dem Motorrad (am Steuer oder als Mitfahrerin/Mitfahrer), ohne Gurt oder Helm zu tragen.",NO],
+["s","Bei sexuellen Kontakten achte ich darauf, ein Kondom zu verwenden, um mich und die andere Person vor HIV zu schützen.",NO],
+["s","Im Straßenverkehr bin ich leichtsinnig, etwa indem ich nach Alkoholkonsum fahre oder bei Leuten einsteige, die getrunken haben.",NO],
+["s","Ich fürchte mich nicht vor dem Tod.",SN],
+["s","Stell dir vor, ein Freund oder eine Freundin hätte eine unheilbare Krebserkrankung. Einem Gespräch würde ich nach Möglichkeit aus dem Weg gehen.",SN],
+["s","Stell dir vor, ein Freund oder eine Freundin hätte eine unheilbare Krebserkrankung. Ich wüsste nicht, was ich sagen oder wie ich helfen könnte.",SN],
+["s","Ich könnte mit einem sterbenden Menschen über den nahenden Tod und seine Gefühle sprechen.",SN],
+["s","Läge ein Freund oder eine Freundin im Krankenhaus im Sterben, würde ich die Person besuchen.",NO],
+["s","Ich kann mir nicht vorstellen, dass ich eines Tages nicht mehr am Leben sein werde.",SN],
+["s","Ich kann es annehmen, dass mir nur begrenzte Lebenszeit bleibt.",SN],
+["s","Sterben will ich jetzt noch nicht, aber ich bin froh darüber, dass ich irgendwann sterben werde.",SN],
+["s","Wie lange ich lebe, ist mir weniger wichtig als die Qualität meines Lebens.",SN],
+["s","Es beunruhigt mich, wie kurz das Leben ist.",SN],
+["s","Stell dir vor, der Vater einer befreundeten Person ist soeben bei einem Verkehrsunfall gestorben. Ich würde ihr nach Möglichkeit nicht begegnen.",SN],
+["s","Stell dir vor, der Vater einer befreundeten Person ist soeben bei einem Verkehrsunfall gestorben. Ich wüsste nicht, was ich sagen oder wie ich trösten könnte.",SN],
+["s","Ist der Vater eines Freundes oder einer Freundin gerade gestorben, würde ich die Person besuchen.",NO],
+["s","Ich kann mit trauernden Menschen über ihren Verlust und ihren Schmerz sprechen.",SN],
+["s","Machst du dir manchmal Gedanken darüber, was nach dem Tod kommt?",NO],
+["s","Dass ich nicht weiß, was nach dem Tod kommt, beunruhigt mich.",SN],
+["r","Welche Aussage trifft am ehesten auf dich zu (nur eine Antwort)?",["Ich glaube, mit dem Tod endet das individuelle Dasein endgültig.","Ich glaube, dass es nach dem Tod in irgendeiner Form weitergeht.","Ich weiß nicht, was ich glauben soll."]],
+["s","Der Tod ist für mich das Schlimmste, was es gibt.",SN],
+["s","Der Tod erscheint mir als Ausweg aus einem Leben voller Schwierigkeiten.",SN],
+["s","Manche Lebenserfahrungen finde ich schlimmer als den Tod.",SN],
+["t","Angenommen, bei dir würde eine unheilbare Krankheit festgestellt und dir blieben nur noch drei Monate. Wie würdest du diese Zeit verbringen, und was wäre dir unbedingt noch wichtig?"]
 ];
 const KEY="m05-a15-v1",$=s=>document.querySelector(s);
 let A={};try{A=JSON.parse(localStorage.getItem(KEY)||"{}")}catch(e){}
@@ -147,11 +147,11 @@ $("#f").addEventListener("input",e=>{const t=e.target,m=/^q(\d+)$/.exec(t.name||
  if(t.value==="")delete A[m[1]];else A[m[1]]=t.value;save();t.closest(".q").classList.toggle("a",t.value!=="");const pa=document.getElementById("pa"+m[1]);if(pa)pa.textContent=t.value;prog()});
 function lab(q,v){if(q[0]==="t")return v;const o=q[2][+v];return o||("Stufe "+(+v+1)+" von 4 ("+q[2][0]+" … "+q[2][3]+")")}
 $("#b-txt").onclick=()=>{
- const t="A15 Auseinandersetzung mit Tod und Sterben\n\n"+Q.map((q,i)=>(i+1)+". "+q[1]+"\n   → "+(A[i+1]!==undefined&&A[i+1]!==""?lab(q,A[i+1]):"(keine Antwort)")).join("\n\n")+"\n";
- const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([t],{type:"text/plain;charset=utf-8"}));a.download="A15-Antworten.txt";a.click();setTimeout(()=>URL.revokeObjectURL(a.href),2000)};
+ const t="Auseinandersetzung mit Tod und Sterben\n\n"+Q.map((q,i)=>(i+1)+". "+q[1]+"\n   → "+(A[i+1]!==undefined&&A[i+1]!==""?lab(q,A[i+1]):"(keine Antwort)")).join("\n\n")+"\n";
+ const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([t],{type:"text/plain;charset=utf-8"}));a.download="Fragebogen-Antworten.txt";a.click();setTimeout(()=>URL.revokeObjectURL(a.href),2000)};
 $("#b-json").onclick=()=>{
- const o={form:"A15",version:1,saved:new Date().toISOString(),answers:A};
- const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([JSON.stringify(o,null,2)],{type:"application/json"}));a.download="A15-Antworten.json";a.click();setTimeout(()=>URL.revokeObjectURL(a.href),2000)};
+ const o={form:"fragebogen-tod",version:1,saved:new Date().toISOString(),answers:A};
+ const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([JSON.stringify(o,null,2)],{type:"application/json"}));a.download="Fragebogen-Antworten.json";a.click();setTimeout(()=>URL.revokeObjectURL(a.href),2000)};
 $("#b-imp").onclick=()=>$("#f-imp").click();
 $("#f-imp").addEventListener("change",e=>{
  const f=e.target.files[0];e.target.value="";if(!f)return;
@@ -159,14 +159,14 @@ $("#f-imp").addEventListener("change",e=>{
  r.onload=()=>{
   try{
    const o=JSON.parse(r.result);
-   if(!o||o.form!=="A15"||typeof o.answers!=="object"||o.answers===null)throw new Error("format");
+   if(!o||o.form!=="fragebogen-tod"||typeof o.answers!=="object"||o.answers===null)throw new Error("format");
    const n={};let c=0;
    Q.forEach((q,i)=>{const v=o.answers[i+1];if(v===undefined||v==="")return;
     if(q[0]==="t"){if(typeof v==="string"){n[i+1]=v.slice(0,5000);c++}}
     else{const k=String(v),max=q[0]==="r"?q[2].length:4;if(/^\d$/.test(k)&&+k<max){n[i+1]=k;c++}}});
    if(Object.keys(A).length&&!confirm("Vorhandene Antworten durch "+c+" importierte ersetzen?"))return;
    A=n;save();render();alert(c+" Antworten importiert.");
-  }catch(err){alert("Die Datei ist keine gültige A15-Antwortdatei.")}
+  }catch(err){alert("Die Datei ist keine gültige Antwortdatei.")}
  };
  r.readAsText(f)});
 $("#b-print").onclick=()=>window.print();
